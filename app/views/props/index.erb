@@ -1,6 +1,9 @@
 <h1>Props:</h1>
 <% @props.each do |prop| %>
 <div class="prop">
-  <div><%= prop.event_title %></div>
+  <div class="prop-title"><%= prop.event_title %></div>
+  <div class="prop-away_team"><%= prop.away_team %>
+    <span class="prop-home_team">vs. <%= prop.home_team %></span>
+  </div><br>
 </div>
 <% end %>
