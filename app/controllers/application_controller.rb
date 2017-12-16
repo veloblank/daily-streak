@@ -2,6 +2,8 @@ require './config/environment'
 
 class ApplicationController < Sinatra::Base
 
+
+
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
@@ -12,7 +14,12 @@ class ApplicationController < Sinatra::Base
 
 
   get '/' do
-    erb :index
+    @user = User.new
+    if logged_in?(session)
+      erb :"/users/index"
+    else
+      erb :index
+    end
   end
 
   get '/login' do
@@ -30,8 +37,36 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
+    @user = User.new(username: params[:username], email: params[:email], password: params[:password])
     erb :signup
   end
 
+  post '/signup' do
+    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+    if @user.errors.any?
+      erb :signup
+    else
+      session[:id] = @user.id
+      erb :"users/index"
+    end
+  end
+
+  get '/logout' do
+    if logged_in?(session)
+      session.clear
+      redirect to '/'
+    else
+      redirect to '/'
+    end
+  end
+
+
+  def current_user(session)
+    @current_user = User.find(session[:user_id])
+  end
+
+  def logged_in?(session)
+    !!session[:user_id]
+  end
 
 end
