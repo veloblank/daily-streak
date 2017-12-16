@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171216102829) do
+ActiveRecord::Schema.define(version: 20171216124503) do
 
   create_table "lists", force: :cascade do |t|
     t.text    "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20171216102829) do
     t.text     "away_team_url"
     t.text     "home_team_url"
     t.boolean  "status_started?"
+    t.integer  "confidence"
   end
 
   create_table "users", force: :cascade do |t|

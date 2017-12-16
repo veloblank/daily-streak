@@ -2,8 +2,6 @@ require './config/environment'
 
 class ApplicationController < Sinatra::Base
 
-
-
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
@@ -11,12 +9,9 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "secret"
   end
 
-
-
   get '/' do
-    @user = User.new
     if logged_in?(session)
-      erb :"/users/index"
+      erb :"/users/home"
     else
       erb :index
     end
@@ -28,7 +23,6 @@ class ApplicationController < Sinatra::Base
     else
       erb :login
     end
-
   end
 
   post '/login' do
@@ -52,17 +46,13 @@ class ApplicationController < Sinatra::Base
       erb :signup
     else
       session[:id] = @user.id
-      erb :"users/index"
+      redirect to "/users/home"
     end
   end
 
   get '/logout' do
-    if logged_in?(session)
-      session.clear
-      redirect to '/'
-    else
-      redirect to '/'
-    end
+    session.clear
+    redirect to '/'
   end
 
 
