@@ -24,19 +24,8 @@ class Prop < ActiveRecord::Base
     @@props.select {|prop| prop.sport == sport}
   end
 
-  # def self.build_props
-  #   Scraper.all_props.each do |prop_hash|
-  #     Prop.new(prop_hash)
-  #   end
-  # end
-  def self.save(hash)
-
-  end
-
   def self.all_props
     @@props
   end
-
-
 
 end
