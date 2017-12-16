@@ -1,7 +1,7 @@
 class PropController < ApplicationController
 
   get '/' do
-    erb :index
+    erb :"props/index"
   end
 
 
