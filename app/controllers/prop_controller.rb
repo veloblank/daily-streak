@@ -1,9 +1,12 @@
 class PropController < ApplicationController
 
-  get '/props/index' do
+  get '/props' do
     Scraper.scrape_props
     @props = Prop.all_props
-    erb :"/props/index"
+    erb :"/props"
+  end
+
+  get '/props/:id' do
   end
 
   get '/scrape' do

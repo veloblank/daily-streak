@@ -10,6 +10,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
+    @user = User.find_by(id: session[:user_id])
     if logged_in?(session)
       erb :"/users/home"
     else
@@ -18,8 +19,9 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
+    @user = User.find_by(id: session[:user_id])
     if logged_in?(session)
-      redirect to '/users/home'
+      erb :'/users/home'
     else
       erb :login
     end
@@ -36,7 +38,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    @user = User.new(username: params[:username], email: params[:email], password: params[:password])
+    @user = User.new
     erb :signup
   end
 
@@ -46,7 +48,7 @@ class ApplicationController < Sinatra::Base
       erb :signup
     else
       session[:id] = @user.id
-      redirect to "/users/home"
+      erb :"/users/home"
     end
   end
 

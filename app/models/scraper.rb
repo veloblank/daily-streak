@@ -2,9 +2,7 @@ class Scraper
 
   ESPN = "http://streak.espn.com/en/"
   LEADERBOARD = "http://streak.espn.com/en/leaderboard?lbType=winningStreaks"
-  @@lb_streaks = []
   @@scraped_props = []
-  #@@props = []
 
   def self.scrape_page
     @doc = Nokogiri::HTML(open(ESPN))
@@ -18,13 +16,13 @@ class Scraper
   def self.scrape_props
     scrape_page.each_with_index do |p, index|
       prop = {
-        prop_id_num: index + 1,
+        #prop_id_num: index + 1,
         event_title: p.css(".gamequestion").text,
         start_time: p.css("div .startTime").text,
         sport: p.css(".sport-description").text,
         away_team: p.css("td span strong")[0].text,
         home_team: "@" + p.css("td span strong")[1].text,
-        prop_preview: p.css("div.matchupStatus a").attr("href").value,
+        #prop_preview: p.css("div.matchupStatus a").attr("href").value,
 
         #if prop is in progress, method error for css method error avoided
         away_team_url: p.css(".matchupStatus").text == "Preview" || p.css(".matchupStatus").text == "Not Started" ? "http://streak.espn.com/en/" + p.css("td a#matchupDiv.mg-check.mg-checkEmpty.requireLogin")[0].attr("href") : "http://streak.espn.com/en/",
@@ -47,8 +45,4 @@ class Scraper
         Prop.new(prop)
     end
   end
-
-#   def self.all_props
-#     @@props
-#   end
 end
