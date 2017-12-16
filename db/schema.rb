@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171216062038) do
+ActiveRecord::Schema.define(version: 20171216063843) do
 
   create_table "props", force: :cascade do |t|
     t.datetime "date"
@@ -23,6 +23,13 @@ ActiveRecord::Schema.define(version: 20171216062038) do
     t.text     "away_team_url"
     t.text     "home_team_url"
     t.boolean  "status_started?"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.text    "username"
+    t.text    "email"
+    t.text    "password_digest"
+    t.integer "streak"
   end
 
 end
