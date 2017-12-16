@@ -1,4 +1,4 @@
-class Props < ActiveRecord::Migration
+class CreateProps < ActiveRecord::Migration
   def change
     create_table :props do |t|
       t.datetime :date
