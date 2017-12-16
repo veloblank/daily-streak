@@ -23,14 +23,19 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    erb :login
+    if logged_in?(session)
+      redirect to '/users/home'
+    else
+      erb :login
+    end
+
   end
 
   post '/login' do
     @user = User.find_by(username: params[:username])
-    if @user != nil && @user["password"] == params[:password]
+    if @user != nil && @user.username == params[:username] && @user.authenticate(params[:password])
       session[:user_id] = @user[:id]
-      redirect to "props/index"
+      redirect to "/users/home"
     else
       erb :error
     end
