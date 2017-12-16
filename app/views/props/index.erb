@@ -1,9 +1,13 @@
 <h1>Props: <%= @props.size %> total</h1>
-<% @props.each do |prop| %>
-<div class="prop">
-  <div class="prop-title"><%= prop.event_title %></div>
+<% @props.each.with_index(1) do |prop, i| %>
+<div class="prop-container">
+  <div class="prop-title">
+  <!--<h4><%= i %>.</h4> -->
+  <input type="checkbox" name="prop_id" value="">
+  <%= prop.start_time %> - <%= prop.event_title %>  <span style="color: red"><%= prop.matchup_status %></span></div>
   <div class="prop-away_team"><%= prop.away_team %>
     <span class="prop-home_team">vs. <%= prop.home_team %></span>
-  </div><br>
+  </div>
+  <hr><br>
 </div>
 <% end %>
