@@ -10,7 +10,21 @@ class ApplicationController < Sinatra::Base
 
 
   get '/' do
-    erb :index
+    if logged_in?
+      erb :"props/index"
+    else
+      erb :index
+    end
+
+  end
+
+  get '/login' do
+    erb :login
+
+  end
+
+  get '/signup' do
+    erb :signup
   end
 
 helpers do
@@ -21,6 +35,7 @@ helpers do
 
 
   def logged_in?
+    true
 
   end
 
