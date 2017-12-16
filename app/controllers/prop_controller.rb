@@ -2,7 +2,8 @@ class PropController < ApplicationController
 
   get '/props/index' do
     Scraper.scrape_props
-    binding.pry
+    @props = Prop.all_props
+    erb :"props/index"
   end
 
 

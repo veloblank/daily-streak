@@ -55,8 +55,12 @@
     display: inline;
   }
 
+  .prop-title {
+    color: red;
+  }
+
   .logout-link {
-    
+
     text-align: right;
   }
 
