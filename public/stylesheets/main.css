@@ -52,7 +52,16 @@
   }
 
   .error-messages {
-    display: inline
+    display: inline;
+  }
+
+  .logout-link {
+    display: inline;
+    text-align: right;
+  }
+
+  .user-greeting {
+    display: inline;
   }
 
   .main {
